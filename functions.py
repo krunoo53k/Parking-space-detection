@@ -1,4 +1,3 @@
-from traceback import print_tb
 import pandas as pd
 import numpy as np
 
@@ -17,3 +16,4 @@ def convert_annotations_to_opencv_compatible(data:pd.DataFrame, filename):
     np.savetxt(f, out, delimiter=" ", fmt="%d", newline=' ')
     f.close()
     return data
+
