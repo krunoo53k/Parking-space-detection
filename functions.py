@@ -1,4 +1,3 @@
-from json import load
 import pandas as pd
 import numpy as np
 import os
@@ -22,12 +21,9 @@ def convert_annotations_to_opencv_compatible(data:pd.DataFrame, image_filename):
 
 
 def detectAndDisplay(frame, cascade):
-    print("Starting detect and display")
     frame_gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     frame_gray = cv.equalizeHist(frame_gray)
-    print("Image edited, going into detect MC")
     objects_detected = cascade.detectMultiScale(frame_gray,1.05, 3)
-    print("Detect multi scale finito")
     for (x, y, w, h) in objects_detected:
         frame = cv.rectangle(frame, (x,y), (x+w,y+h), (255,0,0),2)
     cv.imshow('Car detection', frame)
