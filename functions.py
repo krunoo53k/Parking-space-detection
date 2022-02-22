@@ -29,7 +29,6 @@ def detectAndDisplay(frame, cascade):
     objects_detected = cascade.detectMultiScale(frame_gray,1.05, 3)
     print("Detect multi scale finito")
     for (x, y, w, h) in objects_detected:
-        center = (x + w // 2, y + h // 2)
         frame = cv.rectangle(frame, (x,y), (x+w,y+h), (255,0,0),2)
     cv.imshow('Car detection', frame)
     return objects_detected
