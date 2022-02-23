@@ -36,7 +36,7 @@ def load_gt_bbox(filepath):
         gtBBs[idx, :] = [x1, y1, w, h]
     return gtBBs
 
-def detectAndDisplay(frame, cascade, minNeighbors=6):
+def detectAndDisplay(frame, cascade, minNeighbors=3):
     frame_gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     frame_gray = cv.equalizeHist(frame_gray)
     objects_detected = cascade.detectMultiScale(frame_gray, minNeighbors=minNeighbors)
