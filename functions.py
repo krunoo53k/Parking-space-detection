@@ -1,7 +1,9 @@
+from cmath import inf
 import pandas as pd
 import numpy as np
 import os
 import cv2 as cv
+import re
 
 def load_annotations_from_file(file_path):
     data = pd.read_csv(file_path, sep=" ", header=None)
@@ -19,6 +21,21 @@ def convert_annotations_to_opencv_compatible(data:pd.DataFrame, image_filename):
     f.close()
     return data
 
+def load_gt_bbox(filepath):
+    with open(filepath) as f:
+        data = f.read()
+    objs = re.findall('\d+ \d+ \d+ \d+ \d+', data)
+    
+    nums_obj = len(objs)
+    gtBBs = np.zeros((nums_obj, 4))
+    for idx, obj in enumerate(objs):
+        info = re.findall('\d+', obj)
+        x1 = float(info[0])
+        y1 = float(info[1])
+        w = float(float(info[2])-x1)
+        h = float(float(info[3])-y1)
+        gtBBs[idx, :] = [x1, y1, w, h]
+    return gtBBs
 
 def detectAndDisplay(frame, cascade):
     frame_gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
@@ -43,3 +60,4 @@ with os.scandir(path) as it:
         if entry.name.endswith(".txt") and entry.is_file():
             data = load_annotations_from_file(entry.path)
             convert_annotations_to_opencv_compatible(data, entry.name)
+
