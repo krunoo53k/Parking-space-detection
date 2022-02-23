@@ -11,7 +11,7 @@ def load_annotations_from_file(file_path):
 
 def convert_annotations_to_opencv_compatible(data, image_filename):
     num_of_detected_cars=len(data)
-    out=data.values.ravel('C')
+    out=data.ravel('C')
     out=np.concatenate(([num_of_detected_cars],out))
     f=open("Annotations\\pos.txt", "a")
     f.write("datasets/CARPK_devkit/data/Images/"+image_filename[0:-4]+".png"+" ")
@@ -53,7 +53,7 @@ with os.scandir("negative\\") as it:
         f.write("negative\\"+entry.name)
         f.write("\n")
     f.close()
-
+    
 with os.scandir(path) as it:
     for entry in it:
         if entry.name.endswith(".txt") and entry.is_file():
