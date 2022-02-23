@@ -39,7 +39,7 @@ def load_gt_bbox(filepath):
 def detectAndDisplay(frame, cascade):
     frame_gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     frame_gray = cv.equalizeHist(frame_gray)
-    objects_detected = cascade.detectMultiScale(frame_gray,1.05)
+    objects_detected = cascade.detectMultiScale(frame_gray, minNeighbors=18)
     for (x, y, w, h) in objects_detected:
         frame = cv.rectangle(frame, (x,y), (x+w,y+h), (255,0,0),2)
     cv.imshow('Car detection', frame)
