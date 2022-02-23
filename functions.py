@@ -6,12 +6,11 @@ import cv2 as cv
 import re
 
 def load_annotations_from_file(file_path):
-    data = pd.read_csv(file_path, sep=" ", header=None)
+    data = load_gt_bbox(file_path)
     return data
 
-def convert_annotations_to_opencv_compatible(data:pd.DataFrame, image_filename):
+def convert_annotations_to_opencv_compatible(data, image_filename):
     num_of_detected_cars=len(data)
-    data=data.drop(data.columns[[4]], axis=1)
     out=data.values.ravel('C')
     out=np.concatenate(([num_of_detected_cars],out))
     f=open("Annotations\\pos.txt", "a")
