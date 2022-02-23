@@ -1,0 +1,1 @@
+-data cascade5/ -vec pos5.vec -bg neg.txt -w 48 -h 27 -numPos 700 -numNeg 3000  -acceptanceRatioBreakValue 0.0000412
