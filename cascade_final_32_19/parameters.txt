@@ -1,0 +1,1 @@
+-data .\cascade_final_32_19\ -vec .\pos_final_32_19.vec -bg neg.txt -w 32 -h 19 -numPos 2000 -numNeg 2000 -acceptanceRatioBreakValue 0.0000412 -precalcIdxBufSize 4096 -precalcValBufSize 4096
