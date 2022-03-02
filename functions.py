@@ -1,13 +1,7 @@
-from cmath import inf
-import pandas as pd
 import numpy as np
 import os
 import cv2 as cv
 import re
-
-def load_annotations_from_file(file_path):
-    data = load_gt_bbox(file_path)
-    return data
 
 def convert_annotations_to_opencv_compatible(data, image_filename):
     num_of_detected_cars=len(data)
@@ -57,6 +51,6 @@ with os.scandir("negative\\") as it:
 with os.scandir(path) as it:
     for entry in it:
         if entry.name.endswith(".txt") and entry.is_file():
-            data = load_annotations_from_file(entry.path)
+            data = load_gt_bbox(entry.path)
             convert_annotations_to_opencv_compatible(data, entry.name)
 
