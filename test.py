@@ -2,6 +2,7 @@ import cv2 as cv
 from numpy import append
 from functions import *
 import os
+import copy
 
 cascades_list=[]
 cascades_names=[]
@@ -20,6 +21,8 @@ print(cascades_names)
 
 frame=cv.imread("test_images\\20160524_GF1_00038.png")
 
-for cascade_filter, cascade_name in cascades_list, cascades_names:
-    detectAndDisplay(frame,cascade_filter, 24)
+for cascade_filter in cascades_list:
+    displayed_image=copy.deepcopy(frame)
+    detected_objects=detectObjects(displayed_image,cascade_filter, 24)
+    displayObjects("Detected cars!", displayed_image, detected_objects)
     cv.waitKey()
