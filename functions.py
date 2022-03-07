@@ -41,6 +41,13 @@ def displayObjects(window_name, frame, objects_detected):
         frame = cv.rectangle(frame, (x,y), (x+w,y+h), (255,0,0),2)
     cv.imshow(window_name, frame)
 
+def getCarNumOfImage(image_name, annotations_file_path):
+    with open(annotations_file_path) as f:
+        data = f.read()
+    text=re.findall(image_name+" [0-9]*", data)
+    return int(re.findall(" [0-9]*", text[0])[0][1:])
+    
+
 path="datasets\CARPK_devkit\data\Annotations\\"
 
 with os.scandir("negative\\") as it:
