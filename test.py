@@ -29,9 +29,9 @@ with os.scandir("test_images\\") as it:
             test_images.append(cv.imread(entry.path))
             test_images_names.append(entry.name)
 
-for (cascade_filter, cascade_name) in zip(cascades_list, cascades_names):
-    for (frame, image_name) in zip(test_images, test_images_names):
-        print("Detecting on image: ", image_name)
+for (frame, image_name) in zip(test_images, test_images_names):
+    print("Detecting on image: ", image_name)
+    for (cascade_filter, cascade_name) in zip(cascades_list, cascades_names):
         displayed_image=copy.deepcopy(frame)
         detected_objects=detectObjects(displayed_image,cascade_filter, 24)
-        print("Cascade '",cascade_name,"' found ", len(detected_objects), "out of ", getCarNumOfImage(image_name, "Annotations\pos1.txt"), " cars.")
+        print("Cascade '",cascade_name,"' found ", len(detected_objects), "out of ", getCarNumOfImage(image_name, "Annotations\pos.txt"), " cars.")
