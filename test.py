@@ -1,19 +1,25 @@
 import cv2 as cv
+from numpy import append
 from functions import *
+import os
 
-w24h24=cv.CascadeClassifier('cascade_final_32_19_optimized\\cascade.xml')
-w32h19=cv.CascadeClassifier('cascade_final_48_27_lbp\\cascade.xml')
-w48h27=cv.CascadeClassifier('cascade_final_32_19\\cascade.xml')
-frame=cv.imread("20160524_GF1_00149.png")
-#frame=cv.resize(frame, (640,480), interpolation=cv.INTER_AREA)
-cars=detectAndDisplay(frame, w24h24, 24)
-print("Detected ", len(cars), " cars.")
-cv.waitKey()
+cascades_list=[]
+cascades_names=[]
 
-cars=detectAndDisplay(frame, w32h19, 24)
-print("Detected ", len(cars), " cars.")
-cv.waitKey()
+with os.scandir("cascades\\") as cascades:
+    for cascade_folder in cascades:
+        with os.scandir(cascade_folder.path) as it:
+            for entry in it:
+                if entry.name=="cascade.xml" and entry.is_file():
+                    cascades_list.append(cv.CascadeClassifier(entry.path))
+                    cascades_names.append(cascade_folder.name)
+                    break
 
-cars=detectAndDisplay(frame, w48h27)
-print("Detected ", len(cars), " cars.")
-cv.waitKey()
+print(cascades_list)
+print(cascades_names)
+
+frame=cv.imread("test_images\\20160524_GF1_00038.png")
+
+for cascade_filter, cascade_name in cascades_list, cascades_names:
+    detectAndDisplay(frame,cascade_filter, 24)
+    cv.waitKey()
