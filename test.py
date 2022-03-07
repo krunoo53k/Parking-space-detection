@@ -8,6 +8,7 @@ import copy
 cascades_list=[]
 cascades_names=[]
 test_images=[]
+test_images_names=[]
 
 with os.scandir("cascades\\") as cascades:
     for cascade_folder in cascades:
@@ -26,10 +27,11 @@ with os.scandir("test_images\\") as it:
     for entry in it:
         if entry.name.endswith(".png") and entry.is_file():
             test_images.append(cv.imread(entry.path))
+            test_images_names.append(entry.name)
 
 for (cascade_filter, cascade_name) in zip(cascades_list, cascades_names):
-    for frame in test_images:
+    for (frame, image_name) in zip(test_images, test_images_names):
+        print("Detecting on image: ", image_name)
         displayed_image=copy.deepcopy(frame)
         detected_objects=detectObjects(displayed_image,cascade_filter, 24)
-        displayObjects(cascade_name, displayed_image, detected_objects)
-        cv.waitKey()
+        print("Cascade '",cascade_name,"' found ", len(detected_objects), "out of ", getCarNumOfImage(image_name, "Annotations\pos1.txt"), " cars.")
