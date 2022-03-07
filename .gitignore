@@ -3,3 +3,5 @@ __pycache__/
 Annotations/
 negative/
 test_images/
+vectors/
+pos_copy.txt
