@@ -1,3 +1,4 @@
+from cgi import test
 import cv2 as cv
 from numpy import append
 from functions import *
@@ -6,6 +7,7 @@ import copy
 
 cascades_list=[]
 cascades_names=[]
+test_images=[]
 
 with os.scandir("cascades\\") as cascades:
     for cascade_folder in cascades:
@@ -19,10 +21,15 @@ with os.scandir("cascades\\") as cascades:
 print(cascades_list)
 print(cascades_names)
 
-frame=cv.imread("test_images\\20160524_GF1_00038.png")
+#frame=cv.imread("test_images\\20160524_GF1_00038.png")
+with os.scandir("test_images\\") as it:
+    for entry in it:
+        if entry.name.endswith(".png") and entry.is_file():
+            test_images.append(cv.imread(entry.path))
 
-for cascade_filter in cascades_list:
-    displayed_image=copy.deepcopy(frame)
-    detected_objects=detectObjects(displayed_image,cascade_filter, 24)
-    displayObjects("Detected cars!", displayed_image, detected_objects)
-    cv.waitKey()
+for (cascade_filter, cascade_name) in zip(cascades_list, cascades_names):
+    for frame in test_images:
+        displayed_image=copy.deepcopy(frame)
+        detected_objects=detectObjects(displayed_image,cascade_filter, 24)
+        displayObjects(cascade_name, displayed_image, detected_objects)
+        cv.waitKey()
