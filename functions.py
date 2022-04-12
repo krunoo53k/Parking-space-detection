@@ -41,7 +41,7 @@ def displayObjects(window_name, frame, objects_detected):
         frame = cv.rectangle(frame, (x,y), (x+w,y+h), (255,0,0),2)
     cv.imshow(window_name, frame)
 
-def getCarNumOfImage(image_name, annotations_file_path):
+def getNumOfCarsOnImage(image_name, annotations_file_path):
     with open(annotations_file_path) as f:
         data = f.read()
     text=re.findall(image_name+" [0-9]*", data)
