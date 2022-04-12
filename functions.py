@@ -1,6 +1,7 @@
 import numpy as np
 import cv2 as cv
 import re
+import os
 
 def convert_annotations_to_opencv_compatible(data, image_filename):
     num_of_detected_cars=len(data)
@@ -45,3 +46,25 @@ def getCarNumOfImage(image_name, annotations_file_path):
         data = f.read()
     text=re.findall(image_name+" [0-9]*", data)
     return int(re.findall(" [0-9]*", text[0])[0][1:])
+
+def getCascadesAndNames():
+    cascades_list=[]
+    cascades_names=[]
+    with os.scandir("cascades\\") as cascades:
+        for cascade_folder in cascades:
+            with os.scandir(cascade_folder.path) as it:
+                for entry in it:
+                    if entry.name=="cascade.xml" and entry.is_file():
+                        cascades_list.append(cv.CascadeClassifier(entry.path))
+                        cascades_names.append(cascade_folder.name)
+                        break
+    return cascades_list, cascades_names
+
+def getTestImagesAndNames():
+    test_images=[]
+    test_images_names=[]
+    with os.scandir("test_images\\") as it:
+        for entry in it:
+            if entry.name.endswith(".png") and entry.is_file():
+                test_images.append(cv.imread(entry.path))
+                test_images_names.append(entry.name)
