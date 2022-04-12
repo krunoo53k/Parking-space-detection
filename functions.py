@@ -68,3 +68,4 @@ def getTestImagesAndNames():
             if entry.name.endswith(".png") and entry.is_file():
                 test_images.append(cv.imread(entry.path))
                 test_images_names.append(entry.name)
+    return test_images, test_images_names
