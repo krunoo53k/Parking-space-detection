@@ -1,6 +1,3 @@
-from cgi import test
-import cv2 as cv
-from numpy import append
 from functions import *
 import copy
 
