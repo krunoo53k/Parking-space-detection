@@ -51,6 +51,7 @@ One distinction to make is that the *strict accuracy* column is referring to sim
 # References and thanks
 
 Big thanks to [Meng-Ru Hsieh](http://www.cmlab.csie.ntu.edu.tw/~mru/), [Yen-Liang Lin](http://www.cmlab.csie.ntu.edu.tw/~yenliang/Home.html), [Winston Hsu](http://winstonhsu.info/) for providing the following [dataset](https://lafi.github.io/LPN/).
+
 [Marinbenc](https://github.com/marinbenc) for helping me understand this assignment. 
 
 
