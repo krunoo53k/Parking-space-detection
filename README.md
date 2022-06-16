@@ -12,11 +12,11 @@ To properly use scripts in this repository you should abide by the following fol
 ├── Annotations             			# Folder containing positional text file
 ├── cascades                			# Pre-trained cascades
 ├── datasets                			# Folder containing datasets
-│   ├── CARPK_devkit        			# Load and stress tests
+│   ├── CARPK_devkit        			
 │       ├──  data
 │            ├──  Annotations			# Containing annotation files for images
-			 ├──  Images				# Images for training/testing
-├── negative  		 					# Folder which contains negative images for training process
+|			 ├──  Images		# Images for training/testing
+├── negative  		 			# Folder which contains negative images for training process
 ├── test_images               			# Folder containing images from CARPK_devkit for testing purposes
 ├── LICENSE
 └── README.md
