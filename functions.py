@@ -69,3 +69,6 @@ def getTestImagesAndNames():
                 test_images.append(cv.imread(entry.path))
                 test_images_names.append(entry.name)
     return test_images, test_images_names
+
+def calculateAccuracy(value1, value2):
+    return min(value1,value2)/max(value1,value2)
