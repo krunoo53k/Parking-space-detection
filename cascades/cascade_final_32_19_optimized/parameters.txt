@@ -1,0 +1,1 @@
+-data .\cascade_final_32_19_optimized\ -vec .\pos_final_32_19_stronger.vec -bg neg.txt -w 32 -h 19 -numPos 9000 -numNeg 3000 -numStages 20 -minHitRate 0.999 -maxFalseAlarmRate 0.5 -mode ALL -precalcValBufSize 4096 -precalcIdxBufSize 4096 -featureType LBP
